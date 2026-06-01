@@ -9,7 +9,7 @@ export const PersonalInfoSchema = z.object({
   websiteUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
   linkedInUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
   githubUrl: z.string().url("Invalid URL").optional().or(z.literal("")),
-  profilePhoto: z.string().url("Invalid URL").optional().or(z.literal("")),
+  profilePhoto: z.string().optional().or(z.literal("")),
 });
 
 export const ProfessionalSummarySchema = z.object({

@@ -34,53 +34,71 @@ export default function ResumePreview({ data }: ResumePreviewProps) {
     <div className="bg-white min-h-[1056px] w-full p-8 md:p-12 text-black font-serif print:p-0 shadow-lg shadow-black/10 mx-auto print:shadow-none">
       
       {/* Header */}
-      <header className="mb-6 border-b-2 border-black/80 pb-4 text-center">
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-1 text-gray-900 font-sans uppercase">
-          {personalInfo.fullName || "Your Name"}
-        </h1>
-        {personalInfo.jobTitle && (
-          <h2 className="text-lg md:text-xl text-primary font-medium tracking-wide mb-3 font-sans">
-            {personalInfo.jobTitle}
-          </h2>
-        )}
-        
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs md:text-sm text-gray-700 font-sans mt-3">
-          {personalInfo.email && (
-            <span className="flex items-center gap-1">
-              <MailIcon className="w-3 h-3" />
-              {personalInfo.email}
-            </span>
+      <header className="mb-6 border-b-2 border-black/80 pb-5">
+        <div className={`flex ${personalInfo.profilePhoto ? "items-center gap-5" : "flex-col items-center text-center"}`}>
+
+          {/* Profile photo */}
+          {personalInfo.profilePhoto && (
+            <div className="shrink-0">
+              <img
+                src={personalInfo.profilePhoto}
+                alt={personalInfo.fullName || "Profile photo"}
+                className="h-24 w-24 rounded-full object-cover border-2 border-gray-200"
+                style={{ boxShadow: "0 2px 12px rgba(0,0,0,0.12)" }}
+              />
+            </div>
           )}
-          {personalInfo.phone && (
-            <span className="flex items-center gap-1">
-              <PhoneIcon className="w-3 h-3" />
-              {personalInfo.phone}
-            </span>
-          )}
-          {personalInfo.location && (
-            <span className="flex items-center gap-1">
-              <MapPinIcon className="w-3 h-3" />
-              {personalInfo.location}
-            </span>
-          )}
-          {personalInfo.websiteUrl && (
-            <span className="flex items-center gap-1">
-              <LinkIcon className="w-3 h-3" />
-              {personalInfo.websiteUrl.replace(/^https?:\/\//, '')}
-            </span>
-          )}
-          {personalInfo.linkedInUrl && (
-            <span className="flex items-center gap-1">
-              <LinkedinIcon className="w-3 h-3" />
-              {personalInfo.linkedInUrl.replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//, '')}
-            </span>
-          )}
-          {personalInfo.githubUrl && (
-            <span className="flex items-center gap-1">
-              <GithubIcon className="w-3 h-3" />
-              {personalInfo.githubUrl.replace(/^https?:\/\/(www\.)?github\.com\//, '')}
-            </span>
-          )}
+
+          {/* Name, title, contacts */}
+          <div className={`flex-1 ${personalInfo.profilePhoto ? "" : "text-center"}`}>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-0.5 text-gray-900 font-sans uppercase">
+              {personalInfo.fullName || "Your Name"}
+            </h1>
+            {personalInfo.jobTitle && (
+              <h2 className="text-base md:text-lg text-primary font-semibold tracking-wide mb-2 font-sans">
+                {personalInfo.jobTitle}
+              </h2>
+            )}
+
+            <div className={`flex flex-wrap gap-x-4 gap-y-1 text-xs md:text-sm text-gray-700 font-sans mt-2 ${personalInfo.profilePhoto ? "" : "justify-center"}`}>
+              {personalInfo.email && (
+                <span className="flex items-center gap-1">
+                  <MailIcon className="w-3 h-3" />
+                  {personalInfo.email}
+                </span>
+              )}
+              {personalInfo.phone && (
+                <span className="flex items-center gap-1">
+                  <PhoneIcon className="w-3 h-3" />
+                  {personalInfo.phone}
+                </span>
+              )}
+              {personalInfo.location && (
+                <span className="flex items-center gap-1">
+                  <MapPinIcon className="w-3 h-3" />
+                  {personalInfo.location}
+                </span>
+              )}
+              {personalInfo.websiteUrl && (
+                <span className="flex items-center gap-1">
+                  <LinkIcon className="w-3 h-3" />
+                  {personalInfo.websiteUrl.replace(/^https?:\/\//, '')}
+                </span>
+              )}
+              {personalInfo.linkedInUrl && (
+                <span className="flex items-center gap-1">
+                  <LinkedinIcon className="w-3 h-3" />
+                  {personalInfo.linkedInUrl.replace(/^https?:\/\/(www\.)?linkedin\.com\/in\//, '')}
+                </span>
+              )}
+              {personalInfo.githubUrl && (
+                <span className="flex items-center gap-1">
+                  <GithubIcon className="w-3 h-3" />
+                  {personalInfo.githubUrl.replace(/^https?:\/\/(www\.)?github\.com\//, '')}
+                </span>
+              )}
+            </div>
+          </div>
         </div>
       </header>
 
