@@ -3,7 +3,7 @@ import ResumeForm from "@/components/ResumeForm";
 import ResumePreview from "@/components/ResumePreview";
 import { useResumeData } from "@/hooks/useResumeData";
 import { Button } from "@/components/ui/button";
-import { Download, Trash2, FileText, Sparkles, Menu, X } from "lucide-react";
+import { Download, Trash2, FileText, Sparkles, Menu, X, Zap } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,10 +17,84 @@ import {
 } from "@/components/ui/alert-dialog";
 import { motion } from "framer-motion";
 
+function AdSlot({ id, variant = "banner" }: { id: string; variant?: "banner" | "wide" | "footer" }) {
+  const isWide = variant === "wide";
+  const isFooter = variant === "footer";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="no-print w-full"
+    >
+      <div className={`relative w-full overflow-hidden ${isFooter ? "rounded-2xl" : ""}`}
+        style={{
+          background: isWide
+            ? "linear-gradient(135deg, #0a0f1e 0%, #080d18 50%, #0a1020 100%)"
+            : isFooter
+            ? "linear-gradient(135deg, #0d1325 0%, #0a1020 100%)"
+            : "linear-gradient(135deg, #080d18 0%, #0a1020 100%)",
+        }}
+      >
+        {/* Animated top gradient border */}
+        <div
+          className="absolute top-0 left-0 right-0 h-[2px]"
+          style={{
+            background: "linear-gradient(90deg, transparent, #14b8a6, #6366f1, #14b8a6, transparent)",
+            backgroundSize: "200% 100%",
+            animation: "shimmerBorder 3s linear infinite",
+          }}
+        />
+
+        {/* Background glow orbs */}
+        <div className="absolute -top-10 left-1/4 w-40 h-40 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: "radial-gradient(circle, #14b8a6, transparent)" }} />
+        <div className="absolute -bottom-10 right-1/4 w-40 h-40 rounded-full opacity-10 blur-3xl pointer-events-none"
+          style={{ background: "radial-gradient(circle, #6366f1, transparent)" }} />
+
+        <div className={`relative flex flex-col items-center justify-center ${isWide ? "py-6 px-4" : isFooter ? "py-5 px-4" : "py-4 px-4"} gap-3`}>
+
+          {/* Sponsored label */}
+          <div className="flex items-center gap-1.5">
+            <div className="h-px w-8 bg-gradient-to-r from-transparent to-white/20" />
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-white/30 select-none">Sponsored</span>
+            <div className="h-px w-8 bg-gradient-to-l from-transparent to-white/20" />
+          </div>
+
+          {/* Ad content wrapper */}
+          <div
+            id={id}
+            className="max-w-full w-full flex justify-center items-center"
+            style={{ minHeight: isWide ? "90px" : "60px" }}
+          />
+
+          {/* Bottom badge */}
+          <div className="flex items-center gap-1.5 mt-1">
+            <Zap className="h-3 w-3 text-primary/60" />
+            <span className="text-[9px] text-white/20 tracking-wider">Premium Partner</span>
+          </div>
+        </div>
+
+        {/* Bottom gradient border */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-[1px]"
+          style={{
+            background: "linear-gradient(90deg, transparent, rgba(99,102,241,0.4), transparent)",
+          }}
+        />
+      </div>
+    </motion.div>
+  );
+}
+
 function AdBanner() {
   useEffect(() => {
-    const container = document.getElementById("container-16744590e5745e39d8225c5c618d56fe");
-    if (container && container.innerHTML === "") {
+    const existingScript = document.querySelector(
+      'script[src*="16744590e5745e39d8225c5c618d56fe"]'
+    );
+    if (!existingScript) {
       const script = document.createElement("script");
       script.async = true;
       script.setAttribute("data-cfasync", "false");
@@ -29,11 +103,7 @@ function AdBanner() {
     }
   }, []);
 
-  return (
-    <div className="w-full flex justify-center items-center py-2 bg-[#0d1117] border-b border-white/5 min-h-[60px] overflow-hidden no-print">
-      <div id="container-16744590e5745e39d8225c5c618d56fe" className="max-w-full" />
-    </div>
-  );
+  return <AdSlot id="container-16744590e5745e39d8225c5c618d56fe" variant="banner" />;
 }
 
 export default function ResumeBuilder() {
@@ -259,9 +329,7 @@ export default function ResumeBuilder() {
       </section>
 
       {/* ── AD BANNER (mid) ── */}
-      <div className="no-print w-full flex justify-center items-center py-4 bg-[#0a0f1a] border-y border-white/5 min-h-[100px]">
-        <div id="container-16744590e5745e39d8225c5c618d56fe-2" className="max-w-full" />
-      </div>
+      <AdSlot id="container-16744590e5745e39d8225c5c618d56fe-2" variant="wide" />
 
       {/* ── HOW IT WORKS ── */}
       <section id="how-it-works" className="no-print bg-background py-16 px-4 border-t border-white/5">
@@ -340,8 +408,8 @@ export default function ResumeBuilder() {
           </div>
 
           {/* Bottom ad slot */}
-          <div className="mt-8 flex justify-center items-center min-h-[60px]">
-            <div id="container-16744590e5745e39d8225c5c618d56fe-3" className="max-w-full" />
+          <div className="mt-8 px-0">
+            <AdSlot id="container-16744590e5745e39d8225c5c618d56fe-3" variant="footer" />
           </div>
         </div>
       </footer>
