@@ -1,2 +1,13 @@
 User-agent: *
 Allow: /
+
+# Block internal/dev paths
+Disallow: /src/
+Disallow: /node_modules/
+Disallow: /.local/
+
+# Crawl delay for bots
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://resumestudio.replit.app/sitemap.xml

@@ -129,7 +129,7 @@ export default function ResumeBuilder() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-0.5">
-            {["Builder", "Features", "How It Works", "Tips"].map((item) => (
+            {["Builder", "Features", "How It Works", "Tips", "FAQ"].map((item) => (
               <a key={item} href={`#${item.toLowerCase().replace(/ /g, "-")}`}
                 className="px-4 py-2 text-sm text-white/55 hover:text-white rounded-lg hover:bg-white/[0.06] transition-all duration-200 font-medium">
                 {item}
@@ -525,6 +525,95 @@ export default function ResumeBuilder() {
                   <p className="text-white/45 text-xs leading-relaxed">{t.tip}</p>
                 </div>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════
+          FAQ SECTION
+      ══════════════════════════════════════ */}
+      <section id="faq" className="no-print py-20 px-4"
+        style={{ background: "linear-gradient(180deg, #06090f 0%, #080e1a 100%)" }}>
+        <div className="max-w-screen-md mx-auto">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+            className="text-center mb-14">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4 border border-white/10 bg-white/[0.04]">
+              <BookOpen className="h-3 w-3 text-indigo-400" />
+              <span className="text-xs text-white/50 font-semibold uppercase tracking-wider">Common Questions</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-3 tracking-tight">
+              Frequently Asked{" "}
+              <span style={{ background: "linear-gradient(135deg, #6366f1, #14b8a6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+                Questions
+              </span>
+            </h2>
+            <p className="text-white/45 text-base">Everything you need to know about ResumeStudio</p>
+          </motion.div>
+
+          <div className="space-y-3">
+            {[
+              {
+                q: "Is ResumeStudio completely free to use?",
+                a: "Yes, 100% free — forever. Build a complete professional resume, preview it live, and export as PDF with no account, no credit card, and no hidden fees. Everything you need is available at zero cost.",
+              },
+              {
+                q: "Do I need to create an account or sign up?",
+                a: "No sign-up required. Open the site in your browser and start building immediately. Your resume data is saved automatically in your browser — just come back anytime to continue.",
+              },
+              {
+                q: "Will my resume pass ATS (Applicant Tracking Systems)?",
+                a: "Yes. ResumeStudio generates clean, well-structured resumes specifically designed to pass ATS software used by companies like Google, Amazon, Microsoft, and thousands of others.",
+              },
+              {
+                q: "How do I export my resume as a PDF?",
+                a: "Click the 'Export PDF' button in the top navbar. Your browser instantly generates a polished, print-ready PDF — no watermarks, no ResumeStudio branding. What you see is exactly what you get.",
+              },
+              {
+                q: "Is my personal data safe and private?",
+                a: "Completely safe. All data stays inside your browser's local storage and never leaves your device. ResumeStudio does not send or store any personal information on external servers.",
+              },
+              {
+                q: "How many resume sections are included?",
+                a: "ResumeStudio includes 12 professional sections: Personal Information, Professional Summary, Work Experience, Education, Skills, Projects, Certifications, Languages, Volunteer Work, Awards & Honors, Publications, and References.",
+              },
+              {
+                q: "Can I add a profile photo to my resume?",
+                a: "Yes. Upload a photo by dragging and dropping it, clicking the upload area, or pasting a direct image URL. Your photo appears in the resume preview and PDF export immediately.",
+              },
+              {
+                q: "Does the resume update in real-time?",
+                a: "Yes — every keystroke updates the live resume preview on the right instantly. No save buttons, no page reloads. See exactly how your finished resume will look as you type.",
+              },
+            ].map((item, i) => (
+              <motion.details
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.06 }}
+                className="group rounded-2xl border overflow-hidden"
+                style={{ background: "rgba(255,255,255,0.02)", borderColor: "rgba(255,255,255,0.07)" }}
+              >
+                <summary
+                  className="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer select-none list-none hover:bg-white/[0.03] transition-colors"
+                  style={{ WebkitAppearance: "none" } as React.CSSProperties}
+                >
+                  <h3 className="font-semibold text-white/85 text-sm leading-snug group-open:text-white transition-colors">
+                    {item.q}
+                  </h3>
+                  <span
+                    className="shrink-0 h-6 w-6 rounded-full flex items-center justify-center text-white/40 font-bold text-base transition-transform group-open:rotate-45"
+                    style={{ background: "rgba(255,255,255,0.06)" }}
+                  >
+                    +
+                  </span>
+                </summary>
+                <div className="px-6 pb-5 pt-0">
+                  <div className="h-px mb-4" style={{ background: "rgba(255,255,255,0.06)" }} />
+                  <p className="text-white/50 text-sm leading-relaxed">{item.a}</p>
+                </div>
+              </motion.details>
             ))}
           </div>
         </div>
